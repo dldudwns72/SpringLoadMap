@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 // @Component
 // @RequestMapping
+// 수정
 @Controller
 public class SpringMemberFormControllerV1 {
 
