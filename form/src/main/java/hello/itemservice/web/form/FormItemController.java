@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -18,6 +20,21 @@ import java.util.List;
 public class FormItemController {
 
     private final ItemRepository itemRepository;
+
+    /**
+     * Controller의 메소드가 호출될 떄마다 자동으로 해당 코드가 호출된다.
+     * @return 반환값이 자동으로 model에 담기게 된다.
+     */
+    @ModelAttribute("regions")
+    public Map<String, String> regions() {
+        // 순서 보장 LinkedHashMap
+        Map<String, String> regions = new LinkedHashMap<>();
+        regions.put("SEOUL", "서울");
+        regions.put("BUSAN", "부산");
+        regions.put("JEJU", "제주");
+
+        return regions;
+    }
 
     @GetMapping
     public String items(Model model) {
@@ -35,13 +52,13 @@ public class FormItemController {
 
     @GetMapping("/add")
     public String addForm(Model model) {
-        model.addAttribute("item",new Item());
+        model.addAttribute("item", new Item());
         return "form/addForm";
     }
 
     @PostMapping("/add")
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
-        log.info("item.open={}",item.getOpen());
+        log.info("item.open={}", item.getOpen());
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
@@ -60,6 +77,9 @@ public class FormItemController {
         itemRepository.update(itemId, item);
         return "redirect:/form/items/{itemId}";
     }
+
+
+
 
 }
 
