@@ -1,11 +1,17 @@
 package hello.exception.servlet;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,6 +36,27 @@ public class ErrorPageController {
         log.info("error Page 500");
         return "error-page/500";
     }
+
+    /**
+     * URI 과 sendMethod가 동일하다면 produces 속성을 통하여 우선순위를 설정할 수 있다.
+     * 하위의 매핑같은경우 request가 JSON으로 요청이 올 경우 우선순위가 선점되어 호출된다.
+     */
+
+    @RequestMapping(value = "/error-page/500",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String,Object>> errorPage500Api(HttpServletRequest request, HttpServletResponse response) {
+        log.info("API error Page 500");
+
+        HashMap<String, Object> result = new HashMap<>();
+
+        Exception ex = (Exception) request.getAttribute(ERROR_EXCEPTION);
+        result.put("status",request.getAttribute(ERROR_STATUS_CODE));
+        result.put("message",ex.getMessage());
+
+        Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        return new ResponseEntity<>(result, HttpStatus.valueOf(statusCode));
+    }
+
 
     private void printErrorInfo(HttpServletRequest request) {
         log.info("ERROR_EXCEPTION: ex=", request.getAttribute(ERROR_EXCEPTION));
