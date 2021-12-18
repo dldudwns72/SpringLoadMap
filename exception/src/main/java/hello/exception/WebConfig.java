@@ -3,6 +3,7 @@ package hello.exception;
 import hello.exception.filter.LogFilter;
 import hello.exception.interceptor.LogInterceptor;
 import hello.exception.resolver.MyHandlerExceptionResolver;
+import hello.exception.resolver.UserHandlerExceptionResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,10 +26,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/css/**", "/*.ico", "/error", "/error-page/**"); //오류 페이지 경로
     }
 
-    // configureHandlerExceptionResolvers 사용 시 스프링이 기본으로 등록하는 ExceptionResolver가 제거됨
+    // configureHandlerExceptionResolvers 사용 시 스프링이 기본으로 등록하는 ExceptionResolver 가 제거됨
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
         resolvers.add(new MyHandlerExceptionResolver());
+        resolvers.add(new UserHandlerExceptionResolver());
     }
 
     @Bean
