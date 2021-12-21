@@ -1,25 +1,38 @@
-package hello.advanced.app.v0;
+package hello.advanced.app.v1;
 
+import hello.advanced.trace.TraceStatus;
+import hello.advanced.trace.hellotrace.HelloTraceV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class OrderRepository {
+public class OrderRepositoryV1 {
 
-    public void save(String itemId){
-        if(itemId.equals("ex")){
-            throw new IllegalStateException("예외 발생");
+    private final HelloTraceV1 trace;
+
+    public void save(String itemId) {
+        TraceStatus status = null;
+        try {
+            status = trace.begin("OrderRepository.save()");
+            //저장 로직
+            if (itemId.equals("ex")) {
+                throw new IllegalStateException("예외 발생!");
+            }
+            sleep(1000);
+            trace.end(status);
+        } catch (Exception e) {
+            trace.exception(status, e);
+            throw e;
         }
-
-        sleep(1000);
     }
 
-    private void sleep(int millis){
-        try{
+    private void sleep(int millis) {
+        try {
             Thread.sleep(millis);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
 }
