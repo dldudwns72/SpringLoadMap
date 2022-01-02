@@ -1,12 +1,12 @@
-package hello.aop.order.aop.member.annotation;
+package hello.aop.member;
 
-import hello.aop.order.aop.member.ClassAop;
-import hello.aop.order.aop.member.MethodAop;
+import hello.aop.member.annotation.ClassAop;
+import hello.aop.member.annotation.MethodAop;
 import org.springframework.stereotype.Component;
 
 @ClassAop
 @Component
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     @Override
     @MethodAop("test value")

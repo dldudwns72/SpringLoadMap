@@ -1,6 +1,6 @@
 package hello.aop.pointcut;
 
-import hello.aop.order.aop.member.annotation.MemberServiceImpl;
+import hello.aop.member.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package hello.aop.order.aop.member.annotation;
+package hello.aop.member;
 
 public interface MemberService {
     String hello(String param);
