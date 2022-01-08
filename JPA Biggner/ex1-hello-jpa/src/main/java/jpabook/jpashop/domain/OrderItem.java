@@ -2,6 +2,8 @@ package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class OrderItem {
@@ -11,11 +13,11 @@ public class OrderItem {
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @Column(name = "ORDER_ID")
-    private Long orderId;
+    @ManyToOne
+    private List<Item> items = new ArrayList<>();
 
-    @Column(name = "MEMBER_ID")
-    private Long memberId;
+    @OneToMany(mappedBy = "ORDER_ID")
+    private Order order;
 
     private LocalDateTime orderDate;
 
