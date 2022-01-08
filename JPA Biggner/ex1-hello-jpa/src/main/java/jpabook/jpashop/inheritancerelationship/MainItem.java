@@ -6,7 +6,7 @@ import javax.persistence.*;
 //@Inheritance(strategy = InheritanceType.JOINED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn
-public class MainItem {
+public class MainItem extends BasicEntity{
 
     @Id
     @GeneratedValue
