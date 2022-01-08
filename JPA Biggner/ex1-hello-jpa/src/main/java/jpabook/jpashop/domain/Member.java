@@ -1,5 +1,8 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.valuetype.Address;
+import jpabook.jpashop.valuetype.Period;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +15,11 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
-    private String name;
+    @Embedded
+    private Period workPeriod;
 
-    private String street;
-
-    private String zipCode;
+    @Embedded
+    private Address homeAddrss;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
