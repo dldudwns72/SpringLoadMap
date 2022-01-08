@@ -24,10 +24,10 @@ public class JpaMain {
             //em.persist(member);
 
             // JPQL을 통한 쿼리를 통하여 데이터를 가져오기
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
-            for(Member member : result){
-                System.out.println("member.name " + member.getName());
-            }
+            List<MemberExample> result = em.createQuery("select m from Member as m", MemberExample.class).getResultList();
+//            for(Member member : result){
+//                System.out.println("member.name " + member.getName());
+//            }
 
             // 멤버 Read
             //Member findMember = em.find(Member.class , 1L);
@@ -40,7 +40,7 @@ public class JpaMain {
 
             // 멤버 Delete
             //Member findMember = em.find(Member.class , 1L);
-
+            //em.remove(findMember);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
