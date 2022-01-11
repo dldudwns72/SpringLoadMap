@@ -21,17 +21,17 @@ public class MemberRepositoryTest {
     @Rollback(false) // Test에서도 DB를 롤백하지않고 그대로 저장한다
     public void testMember() throws Exception{
         //given
-        Member member = new Member();
-        member.setUsername("memberA");
-
-        //when
-        Long savedId = memberRepository.save(member);
-        Member findMember = memberRepository.find(savedId);
-        
-        //then
-        assertThat(findMember.getId()).isEqualTo(member.getId());
-        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
-        assertThat(findMember).isEqualTo(member); //JPA 엔티티 동일성 보장
+//        Member member = new Member();
+//        member.setUsername("memberA");
+//
+//        //when
+//        Long savedId = memberRepository.save(member);
+//        Member findMember = memberRepository.find(savedId);
+//
+//        //then
+//        assertThat(findMember.getId()).isEqualTo(member.getId());
+//        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+//        assertThat(findMember).isEqualTo(member); //JPA 엔티티 동일성 보장
     }
 
 }
