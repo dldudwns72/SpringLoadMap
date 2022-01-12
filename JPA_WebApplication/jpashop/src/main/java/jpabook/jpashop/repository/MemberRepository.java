@@ -1,6 +1,7 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,10 +9,12 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    //@PersistenceContext
+    //Spring Boot 에서는 @Autowired 를 통하여 EntityManager 의존성 주입 가능
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
