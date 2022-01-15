@@ -40,7 +40,13 @@ public class MemberService {
 
     // 단일 회원 조회
     @Transactional(readOnly = true)
-    public Member findOne(Member member){
-        return memberRepository.findOne(member.getId());
+    public Member findOne(Long id){
+        return memberRepository.findOne(id);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
     }
 }
