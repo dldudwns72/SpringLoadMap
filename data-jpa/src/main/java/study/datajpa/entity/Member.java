@@ -9,6 +9,7 @@ import javax.persistence.*;
 // @Setter 가급적 쓰지마라
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of ={"id","username","age"})
+@NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
 public class Member {
 
     @Id
@@ -25,9 +26,6 @@ public class Member {
     public Member(String username) {
         this.username = username;
     }
-
-
-
 
     public Member(String username, int age, Team team) {
         this.username =username;
