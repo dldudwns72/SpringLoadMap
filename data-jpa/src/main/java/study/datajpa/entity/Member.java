@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-// @Setter 가급적 쓰지마라
+@Setter //가급적 쓰지마라
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of ={"id","username","age"})
 @NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
